@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+</head>
+<body>
+<form action="{% url 'register:val_user' %}" method="post">
+    {% csrf_token %}
+    用户名：<input type="text" name="username" id="" placeholder="请输入你的用户名："> <br>
+    年龄：<input type="text" name="age" id="" placeholder="请输入你的年龄："> <br>
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>

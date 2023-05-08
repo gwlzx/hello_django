@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>显示所有人的信息</title>
+</head>
+<body>
+ <h1>所有人的信息</h1>
+ <a href="{% url 'contact:add_people' %}"><button>新增个人信息</button></a>
+    <ul>
+        {% for p in p_list %}
+            <li><a href="{% url 'contact:people_detail' pk=p.id %}">{{ p.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

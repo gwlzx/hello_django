@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.js"></script>
+    <title>主页</title>
+</head>
+
+<body>
+<form action="/save_pic" method="post", enctype="multipart/form-data">
+    {% csrf_token %}
+    上传图片：<input type="file" name="pic" id="">
+
+    <input type="submit" value="上传图片">
+    
+</form>
+ {{ js }} <br>
+ {{ html|safe }}
+<h1 style="color: red;">
+    {% if user %}
+        这是{{ user }}的主页
+        </h1>
+        <div>
+            <label for="">姓名：</label> <span id="sp1"></span> <br>
+            <label for="">年龄：</label> <span id="sp2"></span> <br>
+        </div>
+        <a href="{% url 'register:logout' %}">
+            <button>退出登录</button>
+        </a>
+        <button id="btn">获取数据并填充</button>
+    {% else %}
+        游客请先登录 <br>
+        <form action="{% url 'register:val_user' %}" method="post">
+            {% csrf_token %}
+            用户名：<input type="text" name="username" id="" placeholder="请输入你的用户名："> <br>
+            年龄：<input type="text" name="age" id="" placeholder="请输入你的年龄："> <br>
+            <input type="submit" value="登录">
+        </form>
+    {% endif %}
+
+<script>
+    $("#btn").click(function () {
+        $.ajax({
+            url: '{% url "contact:get_data" %}',
+            type: 'get',
+            dataType: 'json',
+            success: function (data) {
+                // todo
+                var name = data.name;
+                var age = data.age
+                $("#sp1").text(name);
+                $("#sp2").text(age);
+                console.log(name, age);
+            },
+            error: function (data) {
+                alert('Ajax请求失败！');
+            },
+        });
+
+    })
+
+</script>
+
+</body>
+
+</html>

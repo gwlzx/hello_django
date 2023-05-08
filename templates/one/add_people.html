@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新增个人信息</title>
+</head>
+<body>
+<form action="{% url 'contact:save_data' %}" method="post">
+    {% csrf_token %}
+    姓名：<input type="text" name="username" id=""> <br>
+    年龄：<input type="text" name="age" id=""> <br>
+    <input type="submit" value="新增数据">
+</form>
+</body>
+</html>
